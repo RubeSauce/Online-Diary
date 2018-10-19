@@ -13,6 +13,11 @@
      $("button#loginEnter").hide();
      $("textarea#diary").hide();
      
+               $("button#login").click(function(){         
+                   $("form#login").show();
+                   $("button#loginEnter").show();
+                   $("form#register").hide();
+               });    
      
           $("button#register").click(function(){  
               
@@ -23,39 +28,38 @@
               
                });
               
-          $("button#registerEnter").click(function(){
-     if ( $("#username").val()== "" ||  $("#email").val() == "" ||  $("#password").val() == "" || $("#phoneNumber").val() == "") {
-                  alert("Please fill out the fields.");
-              }     
-            else {  
-                console.log("hi");
-                Username = $("#username").val();
-               Password = $("#password").val();
-              Email = $("#email").val();
-              PhoneNumber = $("#phoneNumber").val();
-         person.push({
-         Username: Username,
-         Password: Password,
-         Email: Email,
-         PhoneNumber: PhoneNumber,
-          Diary: Diary
-          });
+          $("button#registerEnter").click(function(e){
+            e.preventDefault();
+             if ( $("#username").val()== "" ||  $("#email").val() == "" ||  $("#password").val() == "" || $("#phoneNumber").val() == "") {
+                 alert("Please Fill out the Fields");
+                 console.log("hello")         
+              } else {
+                  console.log("hi");
+                    Username = $("#username").val();
+                   Password = $("#password").val();
+                  Email = $("#email").val();
+                  PhoneNumber = $("#phoneNumber").val();
+                 person.push({
+                     Username: Username,
+                     Password: Password,
+                     Email: Email,
+                     PhoneNumber: PhoneNumber,
+                     Diary: Diary
+                  });
                   console.log(person);
-                 }
-             
-          }) ;   
+             }
+      }) ;   
      
-               $("button#login").click(function(){         
-                   $("form#login").show();
-                   $("button#loginEnter").show();
-                   $("form#register").hide();
-               });    
      
-     $("button#loginEnter").click(function(){
-         
+     $("button#loginEnter").click(function(e){
+         e.preventDefault();
       for  ( i = 0 ; i< person.length ; i++) {
-         if (Password == person[i].Password && Username == person[i].Username) {
-             
+         console.log(person[i]);
+          console.log(Password);
+           Username = $("#username").val();
+                   Password = $("#password").val();
+          if (Password == person[i].Password && Username == person[i].Username) {
+             console.log("approved")
               $("button#diarySave").show();
             $("p#diaryP").show();
             $("form#login").hide();
@@ -66,7 +70,7 @@
             $("button#login").hide();
          }
           
-          if   (Password != person[i].Password || Username != person[i].Username ){
+          else {
                alert("ID not found");
           }
           
@@ -81,16 +85,9 @@
           
 
       });
-          
-//  password stuff         
-         //  var x = document.createElement("INPUT");
-//x.setAttribute("type", "password");                     
-                    
-     
-     
-        //localStorage.setItem("Notes",person1 )                        
-        //localStorage.getItem("Notes")                        
-                                
+                             
+          window.localStorage.getItem(Username,Password);         
+     window.localStorage.setItem(Username, Password);
  });
                    
                    
