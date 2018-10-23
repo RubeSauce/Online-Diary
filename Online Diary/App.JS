@@ -29,6 +29,8 @@
                });
               
           $("button#registerEnter").click(function(e){
+                $ ("form#register").hide();
+              $("form#login").hide();
             e.preventDefault();
              if ( $("#username").val()== "" ||  $("#email").val() == "" ||  $("#password").val() == "" || $("#phoneNumber").val() == "") {
                  alert("Please Fill out the Fields");
@@ -46,7 +48,8 @@
                      PhoneNumber: PhoneNumber,
                      Diary: Diary
                   });
-                  console.log(person);
+                 
+                 localStorage.setItem("Person",person)
              }
       }) ;   
      
@@ -79,15 +82,29 @@
      
       $("button#diarySave").click(function(){
             Diary = $("textarea#diary").val();
-          
-   
-          
-          
+          localStorage.setItem("Diary",Diary);
+ });
+     
+     
+     
+       function loadSettings() {
+           // $("button#username").val(localStorage.getItem("Username"));
+            //$("button#password").val(localStorage.getItem("Password"));
+           $("textarea#Diary").val(localStorage.getItem("Diary"));
+           $("Person").val(localStorage.getItem("Person"));
+        }
 
-      });
-                             
-          window.localStorage.getItem(Username,Password);         
-     window.localStorage.setItem(Username, Password);
+        function saveSettings() {
+            var Username = document.getElementById(Username).value;
+            var Password = document.getElementById(Password).value;
+           var Diary = document.getElementById(Diary).value;
+
+            localStorage.setItem("Username",Username)
+            localStorage.setItem("Password",Password)
+            localStorage.setItem("Diary",Diary)
+          
+        }
+         
  });
                    
                    
